@@ -19,4 +19,13 @@ class wget (
       package { 'ftp/wget': ensure => $version }
     }
   }
+
+  if $::kernel == 'windows' {
+    if ! defined(Package['wget']) {
+      package { 'wget':
+        ensure   => installed,
+        provider => chocolatey,
+      }
+    }
+  }
 }
